@@ -1,0 +1,21 @@
+[vault]
+host = "127.0.0.1"
+port = 8200
+tls = false
+token_renew_increment = 60
+
+[metadata]
+host = "127.0.0.1"
+port = 8900
+
+[warden]
+host = "127.0.0.1"
+port = 8705
+
+[log]
+level = "DEBUG"
+json = false
+requests = true
+
+[service]
+backend = ""

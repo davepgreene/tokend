@@ -5,13 +5,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/handlers"
+	"github.com/davepgreene/tokend/api"
 )
 
-type credentialHandler struct{}
+type credentialHandler struct{
+	storage *api.Storage
+}
 
-func newCredentialHandler() http.Handler {
+func newCredentialHandler(s *api.Storage) http.Handler {
 	return handlers.MethodHandler{
-		"GET": &credentialHandler{},
+		"GET": &credentialHandler{s},
 	}
 }
 

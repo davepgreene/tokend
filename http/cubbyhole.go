@@ -5,13 +5,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/handlers"
+	"github.com/davepgreene/tokend/api"
 )
 
-type cubbyHoleHandler struct{}
+type cubbyHoleHandler struct{
+	storage *api.Storage
+}
 
-func newCubbyHoleHandler() http.Handler {
+func newCubbyHoleHandler(s *api.Storage) http.Handler {
 	return handlers.MethodHandler{
-		"GET": &cubbyHoleHandler{},
+		"GET": &cubbyHoleHandler{s},
 	}
 }
 

@@ -14,7 +14,7 @@ type Warden struct {
 	Token          string    `json:"token"`
 	ExpirationTime time.Time `json:"expiration_time"`
 	CreationTime   time.Time `json:"creation_time"`
-	LeaseDuration  int64     `json:"lease_duration"`
+	LeaseDuration  int       `json:"lease_duration"`
 	Renewable      bool      `json:"renewable"`
 	metadata       Metadata
 }
@@ -23,7 +23,7 @@ type wardenTransport struct {
 	ClientToken    string            `json:"client_token"`
 	Policies       []string          `json:"policies"`
 	Metadata       map[string]string `json:"metadata"`
-	LeaseDuration  int64             `json:"lease_duration"`
+	LeaseDuration  int               `json:"lease_duration"`
 	Renewable      bool              `json:"renewable"`
 	CreationTime   string            `json:"creation_time"`
 	ExpirationTime string            `json:"expiration_time"`

@@ -18,9 +18,10 @@ import (
 	"fmt"
 	"os"
 
-	log "github.com/Sirupsen/logrus"
-	http "github.com/davepgreene/tokend/http"
+	"github.com/davepgreene/tokend/api"
+	"github.com/davepgreene/tokend/http"
 	"github.com/davepgreene/tokend/utils"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -40,21 +41,16 @@ var TokendCmd = &cobra.Command{
 	for their service without putting unencrypted secrets out in the wild.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Run: func(cmd *cobra.Command, args []string) {
 		err := initializeConfig()
 		initializeLog()
 		if err != nil {
-			return err
+			panic(err)
 		}
 
-		return boot()
+		storage := api.NewStorage(viper.GetInt("storage.timeout"))
+		http.Handler(storage)
 	},
-}
-
-func boot() error {
-	router := http.Handler()
-	log.Error(router)
-	return router
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.

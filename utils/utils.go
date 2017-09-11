@@ -4,13 +4,18 @@ import (
 	"reflect"
 	"runtime"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
-// GetFunctionName uses reflection to get the name of a fucking as a string
+// GetFunctionName uses reflection to get the name of a function as a string
 func GetFunctionName(i interface{}) string {
 	return runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
+}
+
+// GetTypeName uses reflection to get the name of a type as a string
+func GetTypeName(i interface{}) string {
+	return reflect.TypeOf(i).Name()
 }
 
 // GetLogLevel retrieves the desired log level from settings.

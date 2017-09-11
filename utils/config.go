@@ -1,7 +1,7 @@
 package utils
 
 import (
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -22,8 +22,9 @@ func Defaults() {
 	})
 
 	viper.SetDefault("service", map[string]interface{}{
-		"host": localhost,
-		"port": 4500,
+		"host":    localhost,
+		"port":    4500,
+		"backend": "warden",
 	})
 
 	viper.SetDefault("log", map[string]interface{}{
@@ -36,5 +37,9 @@ func Defaults() {
 		"host": localhost,
 		"port": 8705,
 		"path": "/v1/authenticate",
+	})
+
+	viper.SetDefault("storage", map[string]interface{}{
+		"timeout": 500,
 	})
 }

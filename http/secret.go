@@ -5,13 +5,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/handlers"
+	"github.com/davepgreene/tokend/api"
 )
 
-type secretHandler struct{}
+type secretHandler struct{
+	storage *api.Storage
+}
 
-func newSecretHandler() http.Handler {
+func newSecretHandler(s *api.Storage) http.Handler {
 	return handlers.MethodHandler{
-		"GET": &secretHandler{},
+		"GET": &secretHandler{s},
 	}
 }
 

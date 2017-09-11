@@ -4,20 +4,21 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/davepgreene/tokend/api"
 	"github.com/gorilla/handlers"
 )
 
-type healthHandler struct{}
+type healthHandler struct {
+	storage *api.Storage
+}
 
-func newHealthHandler() http.Handler {
+func newHealthHandler(s *api.Storage) http.Handler {
 	return handlers.MethodHandler{
-		"GET": &healthHandler{},
+		"GET": &healthHandler{s},
 	}
 }
 
 func (h *healthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	w.WriteHeader(http.StatusNotImplemented)
 	b, _ := json.Marshal(h)
 
